@@ -14,7 +14,10 @@ angular.module('Group')
             var londres = [];
             var proyectosEstocolmo = [];
             var proyectosLondres = [];
+            var precandidatos = [];
+            var candidatos = [];
 
+            // Formar los equipos y los proyectos de cada equipo
             inputs.forEach(function(element) {
                 if (estocolmo.length === 0) {
                     estocolmo.push({ numero: element[0] });
@@ -50,6 +53,7 @@ angular.module('Group')
                 proyectosLondres.push(element[1]);
             });
 
+            //  Calcular la cantidad de proyectos de cada miembro de estocolmo
             estocolmo.forEach(function(progEstocolmo) {
                 progEstocolmo.cantidad = 0;
                 proyectosEstocolmo.forEach(function(proyectoEstocolmo) {
@@ -58,7 +62,7 @@ angular.module('Group')
                     }
                 });
             });
-
+            // calcular la candidad de proyectos de cada miembro de londres
             londres.forEach(function(progLondres) {
                 progLondres.cantidad = 0;
                 proyectosLondres.forEach(function(proyectoLondres) {
@@ -68,21 +72,38 @@ angular.module('Group')
                 });
             });
 
-
+            // Elejir que precandidato que ira por proyecto
             inputs.forEach(function(proyecto) {
                 var candidatoEstocolmo;
-                // var candidatoLondres;
+                var candidatoLondres;
 
-                console.log('proyecto' + proyecto);
                 estocolmo.forEach(function(est) {
                     if (proyecto[0] === est.numero) {
                         candidatoEstocolmo = est;
                     }
-                    console.log('candidato estocolmo  ' + candidatoEstocolmo.numero + ' ' + candidatoEstocolmo.cantidad);
                 });
+
+                londres.forEach(function(lon) {
+                    if (proyecto[1] === lon.numero) {
+                        candidatoLondres = lon;
+                    }
+                });
+
+                if (candidatoEstocolmo.cantidad >= candidatoLondres.cantidad) {
+                    precandidatos.push(candidatoEstocolmo.numero);
+                } else {
+                    precandidatos.push(candidatoLondres.numero);
+                }
+
             });
 
-            return 'ok';
+            // Limpiar el array de valores repetidos
+            precandidatos.forEach(function(valor) {
+                if (candidatos.indexOf(valor) === -1) {
+                    candidatos.push(valor);
+                }
+            });
+            return candidatos;
         };
 
     })
