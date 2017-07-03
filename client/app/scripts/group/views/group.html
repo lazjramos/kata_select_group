@@ -1,5 +1,17 @@
 <h3>Group</h3>
 <br>
 <div>
-  <br><a href="#/" class="kataFont">Home</a>
+    <label for="" id="label-entrada">Ejemplo de entrada: <span>[[1020, 2003],[1023, 2003],[1020, 2001]]</span></label>
+    <input type="text" ng-model="equipos">
+    <button ng-click="todosEquipos(equipos)">Elegir programadores a enviar</button>
+    <p>Entrada: {{ equipos }}</p>
+
+    <div ng-show="candidatos">
+        <h3>Listado de candidatos</h3>
+        <ul id="lista-candidatos">
+            <li ng-repeat="candidato in candidatos">{{ candidato }}</li>
+        </ul>
+    </div>
+
+    <br><a href="#/" class="kataFont">Home</a>
 </div>

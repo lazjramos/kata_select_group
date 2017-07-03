@@ -9,6 +9,7 @@ angular.module('Group')
             return num1 + num2;
         };
 
+        // Selecciona a los participantes en todos los equipos\
         $scope.todosEquipos = function(inputs) {
             var estocolmo = [];
             var londres = [];
@@ -16,6 +17,7 @@ angular.module('Group')
             var proyectosLondres = [];
             var precandidatos = [];
             var candidatos = [];
+            var inputs = JSON.parse(inputs);
 
             // Formar los equipos y los proyectos de cada equipo
             inputs.forEach(function(element) {
@@ -103,7 +105,7 @@ angular.module('Group')
                     candidatos.push(valor);
                 }
             });
-            return candidatos;
+            $scope.candidatos = candidatos;
         };
 
     })
