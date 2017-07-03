@@ -30,12 +30,45 @@ describe('Controller: select group', function() {
             ])).toEqual([1000, 2000]);
         });
 
-        iit('todos equipos 2', function() {
+        it('todos equipos 2', function() {
             expect(scope.todosEquipos([
                 [1020, 2003],
                 [1023, 2003],
                 [1020, 2001]
             ])).toEqual([1020, 2003]);
+        });
+
+        it('entrada en forma de string', function() {
+            expect(scope.todosEquipos('[' +
+                '[1020, 2003],' +
+                '[1023, 2003],' +
+                '[1020, 2001]' +
+                ']')).toEqual([1020, 2003]);
+        });
+
+        it('calcular cantidad de proyectos por programador', function() {
+            expect(scope.calcularCantidadProyectos([{ numero: 1020 }, { numero: 1023 }], [1020, 1020, 1023])).toEqual([
+                { numero: 1020, cantidad: 2 },
+                { numero: 1023, cantidad: 1 }
+            ]);
+        });
+
+        it('elegir el candidato de cada proyecto', function() {
+            expect(scope.elegirCandidato([
+                { numero: 1020, cantidad: 2 },
+                { numero: 1023, cantidad: 1 }
+            ], 1020)).toEqual({ numero: 1020, cantidad: 2 });
+        });
+
+        it('Formar equipo de programadores', function() {
+            expect(scope.formarEquipo([{ numero: 1020 }], 1023)).toEqual([
+                { numero: 1020 },
+                { numero: 1023 }
+            ]);
+        });
+
+        iit('Agregar el primero miembro a un equipo', function() {
+            expect(scope.formarEquipo([], 1020)).toEqual([{ numero: 1020 }]);
         });
     });
 
