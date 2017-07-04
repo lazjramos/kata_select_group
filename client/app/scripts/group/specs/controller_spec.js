@@ -27,7 +27,7 @@ describe('Controller: select group', function() {
                 [1000, 2000],
                 [1001, 2000],
                 [1000, 2002]
-            ])).toEqual([1000, 2000]);
+            ])).toEqual([2000, 1000]);
         });
 
         it('todos equipos 2', function() {
@@ -35,7 +35,7 @@ describe('Controller: select group', function() {
                 [1020, 2003],
                 [1023, 2003],
                 [1020, 2001]
-            ])).toEqual([1020, 2003]);
+            ])).toEqual([2003, 1020]);
         });
 
         it('entrada en forma de string', function() {
@@ -43,14 +43,7 @@ describe('Controller: select group', function() {
                 '[1020, 2003],' +
                 '[1023, 2003],' +
                 '[1020, 2001]' +
-                ']')).toEqual([1020, 2003]);
-        });
-
-        it('calcular cantidad de proyectos por programador', function() {
-            expect(scope.calcularCantidadProyectos([{ numero: 1020 }, { numero: 1023 }], [1020, 1020, 1023])).toEqual([
-                { numero: 1020, cantidad: 2 },
-                { numero: 1023, cantidad: 1 }
-            ]);
+                ']')).toEqual([2003, 1020]);
         });
 
         it('elegir el candidato de cada proyecto', function() {
@@ -60,15 +53,15 @@ describe('Controller: select group', function() {
             ], 1020)).toEqual({ numero: 1020, cantidad: 2 });
         });
 
-        it('Formar equipo de programadores', function() {
-            expect(scope.formarEquipo([{ numero: 1020 }], 1023)).toEqual([
-                { numero: 1020 },
-                { numero: 1023 }
+        iit('Formar equipo de programadores', function() {
+            expect(scope.formarEquipo([{ numero: 1020, cantidad: 1 }], 1023)).toEqual([
+                { numero: 1020, cantidad: 1 },
+                { numero: 1023, cantidad: 1 }
             ]);
         });
 
-        iit('Agregar el primero miembro a un equipo', function() {
-            expect(scope.formarEquipo([], 1020)).toEqual([{ numero: 1020 }]);
+        it('Agregar el primero miembro a un equipo', function() {
+            expect(scope.formarEquipo([], 1020)).toEqual([{ numero: 1020, cantidad: 1 }]);
         });
     });
 
