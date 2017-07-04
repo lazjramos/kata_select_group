@@ -9,7 +9,13 @@ angular.module('Group')
             return num1 + num2;
         };
 
-        // Elegir el candidato por proyecto de ambos equipos
+
+        /**
+         * Elegir el candidato por proyecto de ambos equipos
+         * @param equipo
+         * @param proyecto
+         * @return {Object}
+         */
         $scope.elegirCandidato = function(equipo, proyecto) {
             var candidato;
 
@@ -21,7 +27,12 @@ angular.module('Group')
             return candidato;
         };
 
-        // Formar equipo de programadores y calcular la cantidad de proyectos en los que participa
+        /**
+         * Formar equipo de programadores y calcular la cantidad de proyectos en los que participa
+         * @param equipo
+         * @param numeroProgramador
+         * @return {array}
+         */
         $scope.formarEquipo = function(equipo, numeroProgramador) {
             if (equipo.length === 0) {
                 equipo.push({ numero: numeroProgramador, cantidad: 1 });
@@ -39,7 +50,11 @@ angular.module('Group')
             return equipo;
         };
 
-        // Selecciona a los participantes entre los dos equipos
+        /**
+         * Selecciona a los participantes entre los dos equipos
+         * @param roughInputs
+         * @return {array}
+         */
         $scope.todosEquipos = function(roughInputs) {
             var estocolmo = [];
             var londres = [];
